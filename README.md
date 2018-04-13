@@ -6,3 +6,6 @@ Right now, we need to compile only the core extensions for Power. The luajit com
 
 See https://github.com/envoyproxy/envoy/blob/master/bazel/README.md#disabling-extensions
 and https://github.com/envoyproxy/envoy/pull/3002 for more info.
+
+### Usage
+1. bazel build @envoy//source/exe:envoy-static

@@ -11,6 +11,13 @@ and https://github.com/envoyproxy/envoy/pull/3002 for more info.
 ` bazel build --copt "-D __linux" @envoy//source/exe:envoy-static`  
 TODO: Remove the `copt` flag when backward-cpp PR is merged & picked up into envoy.
 
+Note: currently this builds a set commit of envoy. If you want to change it, you have to:
+- clone this repo
+- change the envoy commit in the WORKSPACE file
+- update the sha sum for the new download archive
+- copy in extensions_build_config.bzl from that commit over the one in this repo
+- comment out the luajit extension line in the newly-copied file
+
 ### Known issues:
 1. profiler not built for gperftools with gcc 5 when run using envoy's bazel build config.
 error seen when building envoy: `external/envoy/source/common/profiler/profiler.cc:8:33: fatal error: gperftools/profiler.h: No such file or directory`

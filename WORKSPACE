@@ -4,9 +4,9 @@ workspace(name = "envoy_build_config")
 # and remove any exentions (currently only lua)
 http_archive(
     name = "envoy",
-    strip_prefix="envoy-cef07618939cdaf25fbc3be7646b6fdbbe780f45",
-    sha256 ="70aa1a7bb228eb7ebb00944b48cc09336ce89319c23afedd0270f1b964032dfc",
-    urls = ["https://github.com/envoyproxy/envoy/archive/cef07618939cdaf25fbc3be7646b6fdbbe780f45.zip"],
+    strip_prefix="envoy-c2baf348055284ac761d94e9a06bc37ebf8a3532",
+    sha256 ="f8ffbd5f01f9d3c0b1d2d826e7ca0a80f1a83127392ecd4b7d6cd2e6fe28a006",
+    urls = ["https://github.com/envoyproxy/envoy/archive/c2baf348055284ac761d94e9a06bc37ebf8a3532.zip"],
 )
 local_repository(
     name = "envoy_build_config",

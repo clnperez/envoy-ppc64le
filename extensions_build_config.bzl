@@ -81,4 +81,3 @@ EXTENSIONS = {
 
     "envoy.transport_sockets.capture":                  "//source/extensions/transport_sockets/capture:config",
 }
-

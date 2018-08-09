@@ -11,12 +11,7 @@ and https://github.com/envoyproxy/envoy/pull/3002 for more info.
 ` bazel build --copt "-D __linux" @envoy//source/exe:envoy-static`  
 TODO: Remove the `copt` flag when backward-cpp PR is merged & picked up into envoy.
 
-Note: currently this builds a set commit of envoy. If you want to change it, you have to:
-- clone this repo
-- change the envoy commit in the WORKSPACE file
-- update the sha sum for the new download archive
-- copy in extensions_build_config.bzl from that commit over the one in this repo
-- comment out the luajit extension line in the newly-copied file
+Note: currently this builds a set commit of envoy. If you want to change it, you have to change the envoy commit in `envoy_commit.bzl`.
 
 ### Known issues:
 1. profiler not built for gperftools with gcc 5 when run using envoy's bazel build config.
@@ -29,3 +24,10 @@ gcc defines `__linux__` for ppc64le when building with `-std=c++0x`, which the e
 To get around the problem, just define that using bazel's `copt` flag:
 `bazel build --copt "-D __linux" @envoy//source/exe:envoy-static`  
 PR submitted here: https://github.com/bombela/backward-cpp/pull/104
+
+3. gcc not found in path when building bazel-gazelle:
+This is fixed in upstream rules_go, and there is currently a PR open to update rules_go in envoy. If you need to patch earlier rules_go, you can follow the instructions found here: https://github.com/clnperez/envoy-ppc64le/issues/4#issuecomment-411799295 
+
+
+4. `multiple definition of 'StacktracePowerPCDummyFunction()'`
+One project copied code from another, and didn't rename this function. I submitted a patch here: https://github.com/abseil/abseil-cpp/pull/152 and it's been picked up in envoy via https://github.com/envoyproxy/envoy/pull/4034. If you're building older envoy on Power, you can change that file in your sandbox by just replacing StacktracePowerPCDummyFunction with AbslStacktracePowerPCDummyFunction.
